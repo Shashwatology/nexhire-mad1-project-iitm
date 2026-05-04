@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row pt-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4 border border-dark p-3 bg-white">
+            <h4 class="mb-0">Student Application</h4>
+            <a href="{{ url_for('student.dashboard') }}" class="btn btn-outline-dark rounded-0 px-4">Back to
+                Dashboard</a>
+        </div>
+
+        <div class="card border border-dark rounded-0 shadow-none">
+            <div class="table-responsive">
+                <table class="table table-bordered border-secondary mb-0 text-center align-middle">
+                    <thead class="bg-light">
+                        <tr>
+                            <th scope="col" style="width: 10%;">Drive No.</th>
+                            <th scope="col">Company Name</th>
+                            <th scope="col">Job Title</th>
+                            <th scope="col">Results</th>
+                            <th scope="col" style="width: 25%;">Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for app in applications %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ app.drive.company.user.name }}</td>
+                            <td>{{ app.drive.job_role }}</td>
+                            <td>
+                                {% if app.status == 'shortlisted' %}
+                                <span class="badge bg-success rounded-0 px-3 py-2">Shortlisted</span>
+                                {% elif app.status == 'waiting' %}
+                                <span class="badge bg-warning text-dark rounded-0 px-3 py-2">Waiting</span>
+                                {% elif app.status == 'rejected' %}
+                                <span class="badge bg-danger rounded-0 px-3 py-2">Rejected</span>
+                                {% else %}
+                                <span class="badge bg-secondary rounded-0 px-3 py-2">Applied</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-start">
+                                {% if app.status == 'shortlisted' %}
+                                Congratulations! You have been shortlisted for further rounds.
+                                {% elif app.status == 'waiting' %}
+                                Your application is currently on the waitlist.
+                                {% elif app.status == 'rejected' %}
+                                Unfortunately, your profile was not selected.
+                                {% else %}
+                                Application is under review.
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                You haven't applied to any drives yet.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

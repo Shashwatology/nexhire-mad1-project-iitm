@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-hero d-flex justify-content-between align-items-center">
+    <div style="position: relative; z-index: 1;">
+        <h2 class="fw-bold mb-1"><i class="bi bi-person-circle me-2"></i>Welcome, {{ current_user.name }}</h2>
+        <p class="mb-0 opacity-75 fw-light" style="font-size: 1.1rem;">Discover companies and track your applications.
+        </p>
+    </div>
+    <div style="position: relative; z-index: 1;" class="d-flex flex-column align-items-end gap-3">
+        <form class="d-flex" method="GET" action="{{ url_for('student.dashboard') }}">
+            <div class="input-group shadow-sm border-0 rounded-5 overflow-hidden">
+                <span class="input-group-text bg-white border-0 text-muted"><i class="bi bi-search"></i></span>
+                <input class="form-control border-0 py-2 px-3" type="search" name="search"
+                    placeholder="Search organizations..." value="{{ request.args.get('search', '') }}">
+                <button class="btn btn-dark px-4 fw-bold" type="submit">Search</button>
+            </div>
+        </form>
+        <div class="d-flex gap-2">
+            <a href="{{ url_for('student.profile') }}"
+                class="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"><i class="bi bi-gear me-1"></i>
+                Profile</a>
+            <a href="{{ url_for('student.history') }}"
+                class="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm"><i
+                    class="bi bi-clock-history me-1"></i> History</a>
+            <a href="{{ url_for('auth.logout') }}"
+                class="btn btn-light text-primary fw-bold rounded-pill px-4 shadow-sm">Logout</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Organizations Section -->
+    <div class="col-md-6 mb-4">
+        <div class="card card-premium h-100">
+            <div class="card-header card-header-premium d-flex align-items-center">
+                <i class="bi bi-building text-primary fs-5 me-2"></i>
+                <h5 class="mb-0 fw-bold">Organizations</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-premium mb-0 table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 15%;">ID</th>
+                                <th scope="col">Company Name</th>
+                                <th scope="col" class="text-end" style="width: 35%;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for org in organizations %}
+                            <tr>
+                                <td><span class="badge bg-light text-secondary rounded-pill border">#{{ loop.index
+                                        }}</span></td>
+                                <td class="fw-bold text-dark">{{ org.user.name }}</td>
+                                <td class="text-end">
+                                    <a href="{{ url_for('student.company_overview', company_id=org.id) }}"
+                                        class="btn btn-outline-primary btn-sm rounded-pill fw-bold px-3">View
+                                        Details</a>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center py-5 text-muted">
+                                    <i class="bi bi-inbox fs-2 d-block mb-2"></i>
+                                    No organizations currently available.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applied Drives Section -->
+    <div class="col-md-6 mb-4">
+        <div class="card card-premium h-100">
+            <div class="card-header card-header-premium d-flex align-items-center">
+                <i class="bi bi-send text-success fs-5 me-2"></i>
+                <h5 class="mb-0 fw-bold">Applied Drives</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-premium mb-0 table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 15%;">ID</th>
+                                <th scope="col">Drive Name</th>
+                                <th scope="col" class="text-end" style="width: 35%;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for app in my_applications %}
+                            <tr>
+                                <td><span class="badge bg-light text-secondary rounded-pill border">#{{ loop.index
+                                        }}</span></td>
+                                <td class="fw-bold text-dark">{{ app.drive.name }}</td>
+                                <td class="text-end">
+                                    <a href="{{ url_for('student.drive_details', drive_id=app.drive.id) }}"
+                                        class="btn btn-outline-success btn-sm rounded-pill fw-bold px-3">View Status</a>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center py-5 text-muted">
+                                    <i class="bi bi-file-earmark-x fs-2 d-block mb-2"></i>
+                                    You haven't applied to any drives yet.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

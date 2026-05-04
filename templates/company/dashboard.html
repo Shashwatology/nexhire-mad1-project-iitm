@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-hero d-flex justify-content-between align-items-center">
+    <div style="position: relative; z-index: 1;">
+        <h2 class="fw-bold mb-1"><i class="bi bi-building me-2"></i>Welcome, {{ company.user.name }}</h2>
+        <p class="mb-0 opacity-75 fw-light" style="font-size: 1.1rem;">Manage your placement drives and review
+            applications.</p>
+    </div>
+    <div style="position: relative; z-index: 1;">
+        <a href="{{ url_for('auth.logout') }}"
+            class="btn btn-light text-primary fw-bold rounded-pill px-4 shadow-sm">Logout</a>
+    </div>
+</div>
+
+<!-- Upcoming Drives -->
+<div class="card card-premium mb-5">
+    <div class="card-header card-header-premium d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-calendar-event text-primary fs-5 me-2"></i>
+            <h5 class="mb-0 fw-bold">Upcoming Drives</h5>
+        </div>
+        <a href="{{ url_for('company.create_drive') }}"
+            class="btn btn-primary btn-sm rounded-pill fw-bold px-4 shadow-sm"><i class="bi bi-plus-lg me-1"></i> Create
+            Drive</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-premium mb-0 table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 10%;">ID</th>
+                    <th scope="col">Drive Name</th>
+                    <th scope="col">Applications</th>
+                    <th scope="col" class="text-end" style="width: 35%;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for drive in upcoming_drives %}
+                <tr>
+                    <td><span class="badge bg-light text-secondary rounded-pill border">#{{ loop.index }}</span></td>
+                    <td class="fw-bold text-dark">{{ drive.name }}</td>
+                    <td>
+                        <span class="badge bg-info text-white rounded-pill px-3 py-2 shadow-sm">{{
+                            drive.applications|length }} Applicants</span>
+                    </td>
+                    <td class="text-end">
+                        <a href="{{ url_for('company.view_applications', drive_id=drive.id) }}"
+                            class="btn btn-outline-primary btn-sm rounded-pill fw-bold px-3 me-2">Review
+                            Applications</a>
+                        <a href="{{ url_for('company.mark_complete', drive_id=drive.id) }}"
+                            class="btn btn-outline-success btn-sm rounded-pill fw-bold px-3">Mark Complete</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-center py-5 text-muted">
+                        <i class="bi bi-calendar-x fs-2 d-block mb-2"></i>
+                        No upcoming drives found. Click 'Create Drive' to start recruiting.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Closed Drives -->
+<div class="card card-premium mb-4">
+    <div class="card-header card-header-premium d-flex align-items-center">
+        <i class="bi bi-archive text-secondary fs-5 me-2"></i>
+        <h5 class="mb-0 fw-bold">Closed Drives</h5>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-premium mb-0 table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 10%;">ID</th>
+                    <th scope="col">Drive Name</th>
+                    <th scope="col">Total Applications</th>
+                    <th scope="col" class="text-end" style="width: 20%;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for drive in closed_drives %}
+                <tr>
+                    <td><span class="badge bg-light text-secondary rounded-pill border">#{{ loop.index }}</span></td>
+                    <td class="fw-bold text-dark text-opacity-75">{{ drive.name }}</td>
+                    <td><span class="badge bg-secondary rounded-pill px-3">{{ drive.applications|length }}</span></td>
+                    <td class="text-end">
+                        <a href="{{ url_for('company.view_applications', drive_id=drive.id) }}"
+                            class="btn btn-outline-secondary btn-sm rounded-pill fw-bold px-4">View Records</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-center py-5 text-muted">
+                        <i class="bi bi-folder-x fs-2 d-block mb-2"></i>
+                        No closed drives.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="alert alert-warning text-center mt-5">
+    <h4>Your company account is pending approval.</h4>
+    <p>Please wait for the administrator to approve your account before you can post drives.</p>
+    <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-dark">Logout</a>
+</div>
+{% endblock %}

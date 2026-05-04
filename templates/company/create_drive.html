@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center pt-4">
+    <div class="col-md-7">
+        <div class="card border border-dark rounded-0 shadow-none">
+            <div class="card-body p-4 p-md-5">
+                <h4 class="mb-4 text-center">Create Drive</h4>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label text-muted small mb-1">Drive Name</label>
+                        <input type="text" name="name" class="form-control rounded-5 px-3 py-2 border-dark"
+                            placeholder="e.g. Drive 1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small mb-1">Job Title</label>
+                        <input type="text" name="job_role" class="form-control rounded-5 px-3 py-2 border-dark"
+                            placeholder="e.g. Software Engineer" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small mb-1">Location</label>
+                        <input type="text" name="location" class="form-control rounded-5 px-3 py-2 border-dark"
+                            placeholder="e.g. Chennai" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small mb-1">Job Description</label>
+                        <textarea name="description" class="form-control rounded-4 px-3 py-3 border-dark" rows="4"
+                            placeholder="Job description and requirements..." required></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-muted small mb-1">Eligibility Criteria</label>
+                            <input type="number" step="0.01" name="eligibility_cgpa"
+                                class="form-control rounded-5 px-3 py-2 border-dark" placeholder="e.g. 7.5" required
+                                min="0" max="10">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-muted small mb-1">Salary Package</label>
+                            <input type="number" step="0.1" name="salary"
+                                class="form-control rounded-5 px-3 py-2 border-dark" placeholder="e.g. 12.5" required
+                                min="0">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label text-muted small mb-1">Application Deadline</label>
+                        <input type="date" name="deadline" class="form-control rounded-5 px-3 py-2 border-dark"
+                            required>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <a href="{{ url_for('company.dashboard') }}"
+                            class="btn btn-outline-dark px-4 rounded-0 border-dark">Cancel</a>
+                        <button type="submit"
+                            class="btn btn-outline-success px-5 rounded-0 border-success">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

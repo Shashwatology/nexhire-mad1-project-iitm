@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center pt-4">
+    <div class="col-md-6">
+        <div class="card border border-dark rounded-0 shadow-none">
+            <div class="card-header bg-white border-bottom border-dark">
+                <h4 class="mb-0">{{ drive.name }}</h4>
+            </div>
+            <div class="card-body p-4 p-md-5">
+                <p class="mb-2"><strong>Company:</strong> {{ drive.company.user.name }}</p>
+                <p class="mb-2"><strong>Job Title:</strong> {{ drive.job_role }}</p>
+                <p class="mb-2"><strong>Desc:</strong> {{ drive.description }}</p>
+                <p class="mb-2"><strong>Salary Package:</strong> ₹ {{ drive.salary }} LPA</p>
+                <p class="mb-2"><strong>Location:</strong> {{ drive.location or 'Not specified' }}</p>
+                <p class="mb-2"><strong>Eligibility (CGPA):</strong> {{ drive.eligibility_cgpa }}</p>
+                <p class="mb-4"><strong>Deadline:</strong> {{ drive.deadline.strftime('%d %b %Y') }}</p>
+
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('student.dashboard') }}"
+                        class="btn btn-outline-dark px-4 rounded-0 border-dark">Go Back</a>
+
+                    {% if has_applied %}
+                    <button class="btn btn-secondary px-5 rounded-0 border-secondary" disabled>Applied</button>
+                    {% elif not is_eligible %}
+                    <button class="btn btn-danger px-5 rounded-0 border-danger" disabled>Ineligible</button>
+                    {% else %}
+                    <form method="POST" action="{{ url_for('student.apply', drive_id=drive.id) }}"
+                        style="display:inline;">
+                        <button type="submit"
+                            class="btn btn-outline-success px-5 rounded-0 border-success">Apply</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

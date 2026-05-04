@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card border border-dark rounded-0 shadow-none">
+            <div class="card-body p-5">
+                <h3 class="mb-1">{{ drive.name }}</h3>
+                <p class="text-muted mb-4">{{ drive.job_role }}</p>
+
+                <h5 class="mb-2">Job Description</h5>
+                <p>{{ drive.description }}</p>
+
+                <p class="mb-1"><strong>Salary:</strong> {{ drive.salary }}</p>
+                <p class="mb-5"><strong>Location:</strong> {{ drive.location }}</p>
+
+                <div class="text-center mt-5">
+                    <a href="{{ url_for('admin.dashboard') }}"
+                        class="btn btn-outline-primary px-5 rounded-0 border-primary text-primary">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

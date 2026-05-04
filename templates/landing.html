@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexHire - Welcome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-glow: rgba(79, 70, 229, 0.4);
+            --secondary-glow: rgba(59, 130, 246, 0.4);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Wrapper */
+        .bg-effects-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Soft, light gradient for white background */
+            background: linear-gradient(45deg, #f0f4ff, #e0e7ff, #f8fafc, #eff6ff, #f0f4ff);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+        }
+
+        .hero-glow-1 {
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 70vw;
+            height: 70vw;
+            /* Soft blue glow */
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(255, 255, 255, 0) 60%);
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            animation: crazyFloat1 15s ease-in-out infinite alternate;
+            mix-blend-mode: multiply;
+        }
+
+        .hero-glow-2 {
+            position: absolute;
+            bottom: -20%;
+            right: -10%;
+            width: 80vw;
+            height: 80vw;
+            /* Soft purple glow */
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(255, 255, 255, 0) 60%);
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            animation: crazyFloat2 18s ease-in-out infinite alternate-reverse;
+            mix-blend-mode: multiply;
+        }
+
+        .hero-glow-3 {
+            position: absolute;
+            top: 30%;
+            left: 30%;
+            width: 60vw;
+            height: 60vw;
+            /* Soft cyan glow */
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, rgba(255, 255, 255, 0) 60%);
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: 0;
+            animation: crazyFloat3 20s ease-in-out infinite alternate;
+            mix-blend-mode: multiply;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes crazyFloat1 {
+            0% {
+                transform: translate(0px, 0px) scale(1) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(150px, 100px) scale(1.3) rotate(45deg);
+            }
+
+            100% {
+                transform: translate(-100px, 150px) scale(0.9) rotate(90deg);
+            }
+        }
+
+        @keyframes crazyFloat2 {
+            0% {
+                transform: translate(0px, 0px) scale(1) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(-150px, -100px) scale(1.4) rotate(-45deg);
+            }
+
+            100% {
+                transform: translate(100px, -150px) scale(0.8) rotate(-90deg);
+            }
+        }
+
+        @keyframes crazyFloat3 {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            50% {
+                transform: translate(250px, -200px) scale(1.5);
+            }
+
+            100% {
+                transform: translate(-150px, 150px) scale(0.7);
+            }
+        }
+
+        @keyframes slideUpFade {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Glassmorphism Navbar */
+        .navbar-glass {
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            color: #0f172a !important;
+            text-shadow: none;
+            text-decoration: none;
+        }
+
+        .navbar-brand:hover {
+            color: #4f46e5 !important;
+        }
+
+        .navbar-toggler i {
+            color: #0f172a !important;
+        }
+
+        /* Hero Container */
+        .hero-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: -80px;
+            /* Offset for navbar & visual center */
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1.5px;
+            color: #0f172a;
+            text-shadow: none;
+            animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #475569;
+            text-shadow: none;
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
+            font-weight: 500;
+            animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+            opacity: 0;
+        }
+
+        /* Premium Buttons */
+        .btn-premium {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            border: none;
+            color: white;
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.5);
+            animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+            opacity: 0;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -5px rgba(79, 70, 229, 0.6);
+            color: white;
+        }
+
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            color: #4f46e5;
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+            opacity: 0;
+            text-decoration: none;
+            display: inline-block;
+            margin-left: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-glass:hover {
+            background: #ffffff;
+            border: 1px solid rgba(79, 70, 229, 0.4);
+            transform: translateY(-3px);
+            color: #4338ca;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Glass Cards */
+        .feature-cards-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: -60px auto 40px auto;
+            padding: 0 20px;
+            position: relative;
+            transform: translateY(50px);
+            animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 1.5rem;
+            padding: 2.5rem 2rem;
+            height: 100%;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            background: #ffffff;
+            border-color: rgba(79, 70, 229, 0.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .feature-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem auto;
+            background: rgba(79, 70, 229, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(79, 70, 229, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Impact Section */
+        .impact-section {
+            position: relative;
+            z-index: 1;
+            background: #ffffff;
+            padding: 6rem 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-item h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #4f46e5, #0ea5e9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: #475569;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Footer */
+        .footer-glass {
+            background: #f8fafc;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 2rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .feature-cards-container {
+                transform: translateY(20px);
+                margin-bottom: 40px;
+            }
+
+            .btn-premium,
+            .btn-glass {
+                display: block;
+                width: 100%;
+                margin: 0 0 1rem 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="bg-effects-wrapper">
+        <div class="hero-background"></div>
+        <div class="hero-glow-1"></div>
+        <div class="hero-glow-2"></div>
+        <div class="hero-glow-3"></div>
+    </div>
+
+    <div class="hero-wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-glass py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="{{ url_for('home') }}">
+                    <i class="bi bi-briefcase-fill me-2" style="color: #4f46e5;"></i>
+                    <span>NexHire</span>
+                </a>
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
+                    <i class="bi bi-list fs-1 text-light"></i>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <div class="d-flex flex-column flex-lg-row align-items-lg-center mt-3 mt-lg-0">
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('home') }}"
+                            class="btn-premium d-inline-flex justify-content-center align-items-center px-4 py-2 me-lg-2 rounded-pill shadow-none"
+                            style="font-size: 0.95rem; animation: none; opacity: 1;">Dashboard</a>
+                        {% else %}
+                        <a href="{{ url_for('auth.login') }}"
+                            class="btn btn-link text-dark text-decoration-none fw-semibold me-lg-3 mb-2 mb-lg-0 text-center"
+                            style="font-size: 1rem;">Log in</a>
+                        <a href="{{ url_for('auth.register') }}"
+                            class="btn-premium d-inline-flex justify-content-center align-items-center px-4 py-2 rounded-pill shadow-none mb-2 mb-lg-0"
+                            style="font-size: 0.95rem; animation: none; opacity: 1;">Sign up</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Hero Content -->
+        <div class="hero-content">
+            <h1 class="hero-title">Launch Your Career</h1>
+            <p class="hero-subtitle">Connect with top tier companies and find your dream role through our intelligent
+                placement ecosystem.</p>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-center w-100 px-4">
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('home') }}" class="btn-premium">Enter Dashboard</a>
+                {% else %}
+                <a href="{{ url_for('auth.register') }}" class="btn-premium">Get Started Now</a>
+                <a href="#features" class="btn-glass">Explore Features</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Overlapping Feature Cards -->
+        <div id="features" class="feature-cards-container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="glass-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="bi bi-building feature-icon"></i>
+                        </div>
+                        <h3 class="card-title">Top Companies</h3>
+                        <p class="card-text">Partnering with Fortune 500s and industry-leading unicorns to bring you the
+                            best opportunities.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card" style="animation-delay: 0.7s;">
+                        <div class="feature-icon-wrapper">
+                            <i class="bi bi-people-fill feature-icon"></i>
+                        </div>
+                        <h3 class="card-title">Verified Talent</h3>
+                        <p class="card-text">A highly curated pool of exceptional students pre-vetted and ready to make
+                            an immediate impact.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card" style="animation-delay: 0.8s;">
+                        <div class="feature-icon-wrapper">
+                            <i class="bi bi-lightning-charge-fill feature-icon"></i>
+                        </div>
+                        <h3 class="card-title">Fast Process</h3>
+                        <p class="card-text">Streamlined application tracking and a rapid recruitment pipeline optimized
+                            for maximum efficiency.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Impact Stats Section -->
+    <section class="impact-section">
+        <div class="container text-center">
+            <div class="row g-4">
+                <div class="col-md-4 stat-item">
+                    <h1>{{ stats.companies }}</h1>
+                    <p>Companies<br>Onboarded</p>
+                </div>
+                <div class="col-md-4 stat-item">
+                    <h1>{{ stats.drives }}</h1>
+                    <p>Placement<br>Drives</p>
+                </div>
+                <div class="col-md-4 stat-item">
+                    <h1>{{ stats.students }}</h1>
+                    <p>Students<br>Registered</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-glass text-center">
+        <div class="container">
+            <p class="text-secondary mb-0">&copy; 2026 NexHire. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

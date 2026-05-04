@@ -1,0 +1,142 @@
+body {
+    background: #f8f9fc;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #495057;
+}
+
+.navbar {
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #edf2f9;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #2c3e50 !important;
+}
+
+.card {
+    border: 1px solid #edf2f9;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease-in-out;
+    background: #ffffff;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    background-color: transparent;
+    border-bottom: 1px solid #edf2f9;
+    font-weight: 600;
+    padding: 1.25rem 1.5rem;
+    color: #2c3e50;
+}
+
+.btn-primary {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #4338ca;
+    border-color: #4338ca;
+    transform: scale(1.02);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table> :not(caption)>*>* {
+    padding: 1rem 1.5rem;
+    border-bottom-color: #edf2f9;
+}
+
+.table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    color: #95aac9;
+}
+
+.table tbody tr {
+    transition: all 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fc;
+}
+
+.alert {
+    border-radius: 0.75rem;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.welcome-header {
+    margin-bottom: 2rem;
+}
+
+.welcome-header h2 {
+    font-weight: 700;
+    color: #1e293b;
+    letter-spacing: -0.5px;
+}
+
+/* Custom Badges */
+.badge {
+    padding: 0.4em 0.8em;
+    border-radius: 2rem;
+    font-weight: 500;
+}
+
+.bg-success {
+    background-color: #10b981 !important;
+    color: white;
+}
+
+.bg-warning {
+    background-color: #f59e0b !important;
+    color: white;
+}
+
+.bg-danger {
+    background-color: #ef4444 !important;
+    color: white;
+}
+
+.bg-primary {
+    background-color: #4f46e5 !important;
+    color: white;
+}
+
+.text-success {
+    color: #10b981 !important;
+}
+
+/* Progress bar modern look */
+.progress {
+    border-radius: 1rem;
+    background-color: #edf2f9;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Glassmorphism Profile Header */
+.profile-header-gradient {
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+    color: white;
+    border-radius: 1rem 1rem 0 0 !important;
+    border-bottom: none;
+}
