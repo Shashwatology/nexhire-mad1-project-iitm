@@ -43,24 +43,23 @@ def home():
             return redirect(url_for('student.dashboard'))
     return render_template('landing.html', stats={'companies': Company.query.count(), 'drives': Drive.query.count(), 'students': Student.query.count()})
 
-# Create database and tables automatically on startup
-with app.app_context():
-    db.create_all()
-    print("Programmatic database creation verified/completed.")
-
 def create_admin():
     """
     Creates the default admin user if it doesn't exist.
     """
-    with app.app_context():
-        # check if admin exists
-        if not User.query.filter_by(username='admin').first():
-            hashed_pw = generate_password_hash('admin', method='scrypt') 
-            admin = User(username='admin', password=hashed_pw, name='Admin Role', role='admin')
-            db.session.add(admin)
-            db.session.commit()
-            print("Admin user created!")
+    # check if admin exists
+    if not User.query.filter_by(username='admin').first():
+        hashed_pw = generate_password_hash('admin', method='scrypt') 
+        admin = User(username='admin', password=hashed_pw, name='Admin Role', role='admin')
+        db.session.add(admin)
+        db.session.commit()
+        print("Admin user created!")
+
+# Create database and tables automatically on startup
+with app.app_context():
+    db.create_all()
+    create_admin()
+    print("Programmatic database creation verified/completed.")
 
 if __name__ == '__main__':
-    create_admin()
     app.run(debug=True)
